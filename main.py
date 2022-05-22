@@ -22,7 +22,9 @@ cv2.rectangle(imgTest,(faceLocTest[3], faceLocTest[0]),(faceLocTest[1], faceLocT
 
 #comparing these faces and finding distance between them using linear svm
 results = face_recognition.compare_faces([encodeElon], encodeElon_test)
-print(results)
+faceDis = face_recognition.face_distance([encodeElon], encodeElon_test)
+print(results,faceDis)
+cv2.putText(imgTest, f'{results} {round(faceDis[0],2)}', (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1, (0,0,255), 2)
 
 
 #Use the local binary pattern histogram to detect the faces
