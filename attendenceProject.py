@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 import face_recognition
 import os
+from datetime import datetime
 
 # Load the jpg file into a numpy array.
 #created a list so that our program automatically take them and use them.
@@ -28,6 +29,22 @@ def findEncodings(images):
         encodeList.append(encode)
     return encodeList
 
+#marking attendence and making a list of names wth time 
+#And storing it in a file
+def markAttendence(name):
+    with open('Attendence.csv','r+') as f:
+        myDataList = f.readlines()
+        nameList = []
+        for line in myDataList:
+            entry = line.split(',')
+            nameList.append(entry[0])
+        
+        #if name is not present in the list, It will do nothing
+        if name not in nameList:
+            now = datetime.now()
+            dtString = now.strftime('%H:%M:%S')
+            f.writelines(f'\n{name},{dtString}')
+
 encodeListKnown = findEncodings(images)
 print('Encoding Complete')
 
@@ -44,13 +61,18 @@ while True:
     for encodeFace,faceLoc in zip(encodeCurFrame, facesCurFrame):
         matches = face_recognition.compare_faces(encodeListKnown, encodeFace)
         faceDis = face_recognition.face_distance(encodeListKnown, encodeFace)
-        print(faceDis)
+        # print(faceDis)
         matchIndex = np.argmin(faceDis)
         
         if matches[matchIndex]:
             name = classNames[matchIndex].upper()
-            print(name)
-
+            # print(name)
+            y1,x2,y2,x1 = faceLoc  #locations from facesCurFrame
+            y1, x2, y2, x1 = y1*4, x2*4, y2*4, x1*4  #our image is 1/4th  of the size , in order to calculate with great quality, multiplying it with 4
+            cv2.rectangle(img, (x1,y1), (x2,y2), (0,255,0), 2)  #drawing rectangle of green color if image is correct
+            cv2.rectangle(img, (x1,y2-35), (x2,y2), (0,255,0), cv2.FILLED)  #drawing rectangle of red color if image is not correct
+            cv2.putText(img, name, (x1+6,y2-6), cv2.FONT_HERSHEY_COMPLEX, 1, (255,255,255), 2)
+            markAttendence(name)
     #showing the same image as captured via webcam
     cv2.imshow('Webcam', img)
     cv2.waitKey(1)
