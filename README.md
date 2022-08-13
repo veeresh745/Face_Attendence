@@ -37,7 +37,7 @@ Here we will install the required packages. Below is the list.
  just add your image to testimages folder with yourname.jpg and that will be enough to detect your image, your image will gets added and ready for detection
  When you run the program, after encoding completed, you can see your image name in the Command Line."
 ```
-## Three Weeks Journey With Microsoft Engage Program
+
 ### Here's How I have devided problem Statement
 - First, look at a picture and find all the faces in it.
 - Second, focus on each face and be able to understand that even if a face is turned in a weird direction or in bad lighting, it is still the same person.
