@@ -73,7 +73,7 @@ Here we will install the required packages. Below is the list.
 
 # Future Of This Project
   Since, This project is ready to run, I mean it is so simple and can be used, you run it after connecting it with a camera, and that camera can be placed at the  entrance, and then it is ready to take attendence, mark peaople names along with time. Like for example you want to take attendence in a school, you place a camera in 
-  the entrance of the class or floor, and run the program for say, you take attendence between 8:00 AM to 820 AM, after that terminate the program and voilla your
+  the entrance of the class or floor, and run the program for say, you take attendence between 8:00 AM to 8:20 AM, after that terminate the program and voilla your
   excel file is ready with the names and time the student came.
   Sililarly. for parking area for employees, teacher attendence, factory workers, and it can be used anywhere.
 
